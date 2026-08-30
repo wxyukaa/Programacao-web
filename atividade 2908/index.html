@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EducaWeb</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #dbe2ef;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    .main-card-wrapper {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .custom-navbar {
+      background-color: #030a16;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+
+    .nav-link-active {
+      background-color: #0066ff !important;
+      border-radius: 8px;
+    }
+
+    .hero-card {
+      background: linear-gradient(rgba(3, 10, 22, 0.88), rgba(3, 10, 22, 0.95)), 
+                  url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+      color: #ffffff;
+      min-height: 420px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 5%;
+      opacity: 0.5;
+    }
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover { opacity: 1; }
+
+    .btn-ver-cursos {
+      background-color: #0066ff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 14px rgba(0, 102, 255, 0.4);
+      transition: 0.2s;
+    }
+    .btn-ver-cursos:hover { background-color: #0052cc; color: white; }
+
+    .tech-badges-container {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .badges-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: -15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge-card {
+      width: 65px;
+      height: 80px;
+      border-radius: 6px 6px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 11px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    }
+
+    .badge-html { background: linear-gradient(135deg, #e44d26, #f16529); }
+    .badge-css { background: linear-gradient(135deg, #0070ba, #1572b6); }
+    .badge-js { background: linear-gradient(135deg, #f7df1e, #d6ba00); color: #000; }
+    .badge-card i { font-size: 24px; margin-top: 4px; }
+
+    .laptop-mockup {
+      background: #0d1117;
+      border: 8px solid #2d3748;
+      border-bottom: none;
+      border-radius: 12px 12px 0 0;
+      height: 170px;
+      padding: 15px;
+      text-align: left;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .laptop-base {
+      background: #cbd5e1;
+      height: 12px;
+      border-radius: 0 0 12px 12px;
+      width: 110%;
+      margin-left: -5%;
+    }
+
+    .code-line { height: 8px; border-radius: 4px; margin-bottom: 8px; }
+
+    .carousel-indicators { margin-bottom: 1.2rem; }
+    .carousel-indicators [data-bs-target] {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #fff;
+      opacity: 0.3;
+      border: none;
+    }
+    .carousel-indicators .active { opacity: 1; }
+
+    .courses-container {
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: 40px 30px;
+    }
+
+    .section-title {
+      color: #0f172a;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 35px;
+      height: 4px;
+      background-color: #0066ff;
+      border-radius: 2px;
+      margin: 8px auto 0 auto;
+    }
+
+    .course-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 30px 20px;
+      background-color: #ffffff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .course-icon-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .bg-html-icon { background-color: #ff5722; }
+    .bg-css-icon { background-color: #0066ff; }
+    .bg-bootstrap-icon { background-color: #7952b3; }
+    .bg-js-icon { background-color: #28a745; }
+
+    .course-title {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .course-description {
+      color: #64748b;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .btn-course {
+      border-radius: 8px;
+      padding: 8px 24px;
+      font-weight: 600;
+      background: transparent;
+      transition: 0.2s;
+    }
+
+    .btn-html { border: 1.5px solid #ff5722; color: #ff5722; }
+    .btn-html:hover { background-color: #ff5722; color: white; }
+
+    .btn-css { border: 1.5px solid #0066ff; color: #0066ff; }
+    .btn-css:hover { background-color: #0066ff; color: white; }
+
+    .btn-bootstrap { border: 1.5px solid #7952b3; color: #7952b3; }
+    .btn-bootstrap:hover { background-color: #7952b3; color: white; }
+
+    .btn-js { border: 1.5px solid #28a745; color: #28a745; }
+    .btn-js:hover { background-color: #28a745; color: white; }
+
+    /* SEÇÃO SOBRE NÓS */
+    .about-container {
+      background-color: #eef5ff;
+      border-radius: 16px;
+      padding: 50px 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .about-title {
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 2rem;
+    }
+
+    .about-text {
+      color: #475569;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .btn-conheca-mais {
+      background-color: #0066ff;
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 12px 28px;
+      border: none;
+      transition: 0.2s;
+    }
+
+    .btn-conheca-mais:hover {
+      background-color: #0052cc;
+      color: white;
+    }
+
+    .custom-footer {
+      background-color: #030a16;
+      color: #94a3b8;
+      border-radius: 16px;
+      overflow: hidden;
+      font-size: 0.95rem;
+    }
+
+    .footer-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    .footer-social-icons {
+      display: flex;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .footer-social-icons a {
+      color: #ffffff;
+      font-size: 1.2rem;
+      transition: 0.2s;
+    }
+
+    .footer-social-icons a:hover {
+      color: #0066ff;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: #94a3b8;
+    }
+
+    .footer-contact-item i {
+      color: #ffffff;
+      font-size: 1.1rem;
+    }
+
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body class="p-3 p-md-4">
+
+  <div class="container-fluid max-width-lg">
+    
+    <!-- 1. HERO + NAVBAR -->
+    <div class="main-card-wrapper mb-4">
+      <nav class="navbar navbar-expand-lg custom-navbar px-4 py-3">
+        <div class="container-fluid px-0">
+          <a class="navbar-brand text-white fw-bold d-flex align-items-center gap-2" href="#">
+            <i class="fa-solid fa-graduation-cap fs-4"></i>
+            <span>EducaWeb</span>
+          </a>
+
+          <button class="navbar-toggler navbar-dark border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-end" id="menu">
+            <ul class="navbar-nav align-items-center gap-2 mt-3 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link nav-link-active text-white px-3 py-2 fw-medium" href="#">Início</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white opacity-75 fw-medium px-3" href="#">Cursos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white opacity-75 fw-medium px-3" href="#">Sobre</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white opacity-75 fw-medium px-3" href="#">Depoimentos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white opacity-75 fw-medium px-3" href="#">Contato</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div id="heroCarousel" class="carousel slide hero-card" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner h-100">
+          <div class="carousel-item active p-4 p-md-5">
+            <div class="container-fluid px-md-5">
+              <div class="row align-items-center my-auto">
+                <div class="col-lg-7 text-start mb-4 mb-lg-0">
+                  <h1 class="display-5 fw-bold mb-3">Aprenda hoje,<br>transforme o amanhã</h1>
+                  <p class="fs-5 text-light opacity-75 mb-4">
+                    Cursos online de qualidade para impulsionar sua carreira na área de tecnologia.
+                  </p>
+                  <div>
+                    <a href="#" class="btn-ver-cursos">
+                      Ver Cursos <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-lg-5 text-center">
+                  <div class="tech-badges-container mx-auto">
+                    <div class="badges-wrapper">
+                      <div class="badge-card badge-html">
+                        <span>HTML</span>
+                        <i class="fa-brands fa-html5"></i>
+                      </div>
+                      <div class="badge-card badge-css">
+                        <span>CSS</span>
+                        <i class="fa-brands fa-css3-alt"></i>
+                      </div>
+                      <div class="badge-card badge-js">
+                        <span>JS</span>
+                        <i class="fa-brands fa-js"></i>
+                      </div>
+                    </div>
+                    <div class="laptop-mockup">
+                      <div class="code-line bg-primary w-50"></div>
+                      <div class="code-line bg-success w-75"></div>
+                      <div class="code-line bg-warning w-33"></div>
+                      <div class="code-line bg-info w-66"></div>
+                      <div class="code-line bg-danger w-50"></div>
+                    </div>
+                    <div class="laptop-base"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item p-4 p-md-5">
+            <div class="container-fluid px-md-5">
+              <div class="row align-items-center my-auto">
+                <div class="col-lg-7 text-start mb-4 mb-lg-0">
+                  <h1 class="display-5 fw-bold mb-3">Domine o Front-End<br>do Zero ao Avançado</h1>
+                  <p class="fs-5 text-light opacity-75 mb-4">
+                    Construa projetos reais utilizando as principais tecnologias do mercado.
+                  </p>
+                  <div>
+                    <a href="#" class="btn-ver-cursos">
+                      Conhecer Trilha <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-5 text-center">
+                  <i class="fa-solid fa-laptop-code display-1 text-primary"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item p-4 p-md-5">
+            <div class="container-fluid px-md-5">
+              <div class="row align-items-center my-auto">
+                <div class="col-lg-7 text-start mb-4 mb-lg-0">
+                  <h1 class="display-5 fw-bold mb-3">Certificados <br>Reconhecidos</h1>
+                  <p class="fs-5 text-light opacity-75 mb-4">
+                    Comprove suas habilidades e se destaque em processos seletivos.
+                  </p>
+                  <div>
+                    <a href="#" class="btn-ver-cursos">
+                      Saiba Mais <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-5 text-center">
+                  <i class="fa-solid fa-certificate display-1 text-warning"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+          <i class="fa-solid fa-chevron-left fs-3"></i>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+          <i class="fa-solid fa-chevron-right fs-3"></i>
+          <span class="visually-hidden">Próximo</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. SEÇÃO NOSSOS CURSOS -->
+    <section class="courses-container text-center mb-4">
+      <h2 class="section-title mb-5">Nossos Cursos</h2>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        <div class="col">
+          <div class="course-card">
+            <div class="course-icon-circle bg-html-icon">
+              <i class="fa-code fa-solid"></i>
+            </div>
+            <h3 class="course-title">HTML5</h3>
+            <p class="course-description">
+              Aprenda a criar páginas estruturadas com HTML5 e boas práticas.
+            </p>
+            <a href="#" class="btn btn-course btn-html">Saiba mais</a>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="course-card">
+            <div class="course-icon-circle bg-css-icon">
+              <i class="fa-solid">{ }</i>
+            </div>
+            <h3 class="course-title">CSS3</h3>
+            <p class="course-description">
+              Estilize suas páginas com CSS3 e crie layouts incríveis.
+            </p>
+            <a href="#" class="btn btn-course btn-css">Saiba mais</a>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="course-card">
+            <div class="course-icon-circle bg-bootstrap-icon">
+              <span>B</span>
+            </div>
+            <h3 class="course-title">Bootstrap 5</h3>
+            <p class="course-description">
+              Desenvolva sites responsivos e modernos com Bootstrap 5.
+            </p>
+            <a href="#" class="btn btn-course btn-bootstrap">Saiba mais</a>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="course-card">
+            <div class="course-icon-circle bg-js-icon">
+              <span>JS</span>
+            </div>
+            <h3 class="course-title">JavaScript</h3>
+            <p class="course-description">
+              Adicione interatividade e dinamismo às suas páginas web.
+            </p>
+            <a href="#" class="btn btn-course btn-js">Saiba mais</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SEÇÃO SOBRE NÓS -->
+    <section class="about-container mb-4">
+      <div class="row align-items-center">
+        <div class="col-lg-6 text-center mb-4 mb-lg-0">
+          <img src="https://img.freepik.com/free-vector/learning-concept-illustration_114360-618.jpg" alt="Equipe estudando no computador" class="img-fluid rounded-4" style="max-height: 320px;">
+        </div>
+
+        <div class="col-lg-6 text-start ps-lg-4">
+          <h2 class="about-title mb-3">Sobre Nós</h2>
+          <p class="about-text mb-4">
+            A EducaWeb nasceu com o objetivo de oferecer educação online de qualidade, acessível e prática. Nossos cursos são preparados por profissionais experientes do mercado para ajudar você a conquistar seus objetivos.
+          </p>
+          <a href="#" class="btn btn-conheca-mais">Conheça mais</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. FOOTER (RODAPÉ) -->
+    <footer class="custom-footer pt-5 px-4 px-md-5">
+      <div class="row g-4 mb-5">
+        
+        <!-- Coluna 1: Logo, Descrição e Redes Sociais -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-title">EducaWeb</h5>
+          <p class="pe-lg-3">
+            Plataforma de ensino online focada em tecnologia e inovação.
+          </p>
+          <div class="footer-social-icons">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Links Rápidos -->
+        <div class="col-lg-3 col-md-6 ps-lg-4">
+          <h5 class="footer-title">Links Rápidos</h5>
+          <ul class="footer-links">
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Cursos</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Categorias -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-title">Categorias</h5>
+          <ul class="footer-links">
+            <li><a href="#">Front-end</a></li>
+            <li><a href="#">Back-end</a></li>
+            <li><a href="#">Mobile</a></li>
+            <li><a href="#">DevOps</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Contato -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-title">Contato</h5>
+          <div class="footer-contact-item">
+            <i class="fa-regular fa-envelope"></i>
+            <span>contato@educaweb.com.br</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>(11) 99999-9999</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>São Paulo - SP</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Barra Inferior de Direitos Autorais -->
+      <div class="footer-bottom-bar">
+        &copy; 2025 EducaWeb. Todos os direitos reservados.
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
